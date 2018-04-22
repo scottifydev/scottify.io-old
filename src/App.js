@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { setTimeout } from 'timers';
 
 class App extends Component {
+
+  state = {
+    title: '',
+    body: '',
+    isLoading: true
+  }
+
+componentDidMount () {
+    setTimeout( () => {this.setState({isLoading: false})}, 5000)
+
+
+ }
+
   render() {
     return (
+      (!this.state.isLoading) ? 
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">{this.state.title}</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {this.state.body}
         </p>
       </div>
+      :<p>Loading...</p>
     );
   }
 }
