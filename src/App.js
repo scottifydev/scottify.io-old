@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import classes from './App.css';
+import style from './App.css';
 import { setTimeout } from 'timers';
 import Intro from './components/Intro/Intro';
+import cn from 'classnames';
 
 class App extends Component {
 
@@ -12,14 +13,13 @@ class App extends Component {
   }
 
 componentDidMount () {
-    setTimeout( () => {this.setState({isLoading: false})}, 5000)
 
 
  }
 
   render() {
     return (
-      <div className={classes.App}>
+      <div className={cn(style.App)}>
         <Intro />
       </div>
     );

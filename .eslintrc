@@ -18,6 +18,14 @@
     ],
     "rules": {
         "no-console": 0,
+        "no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": false
+            }
+        ],
         "react/jsx-no-bind": [
             "error",
             {
@@ -26,6 +34,7 @@
                 "ignoreRefs": true
             }
         ],
+        "react/jsx-uses-vars": "warn",
         "react/no-did-update-set-state": "error",
         "react/no-unknown-property": "error",
         "react/no-unused-prop-types": "error",
