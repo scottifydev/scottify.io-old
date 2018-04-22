@@ -17,6 +17,7 @@
         "plugin:react/recommended"
     ],
     "rules": {
+        "no-console": 0,
         "react/jsx-no-bind": [
             "error",
             {

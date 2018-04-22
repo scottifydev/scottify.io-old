@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import { setTimeout } from 'timers';
+import Intro from './components/Intro/Intro';
 
 class App extends Component {
 
@@ -18,13 +19,8 @@ componentDidMount () {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">{this.state.title}</h1>
-        </header>
-        <p className="App-intro">
-          {this.state.body}
-        </p>
+      <div className={classes.App}>
+        <Intro />
       </div>
     );
   }
