@@ -5,8 +5,8 @@ import { setTimeout } from 'timers';
 class App extends Component {
 
   state = {
-    title: '',
-    body: '',
+    title: 'asdasd',
+    body: 'asdasd',
     isLoading: true
   }
 
@@ -18,7 +18,6 @@ componentDidMount () {
 
   render() {
     return (
-      (!this.state.isLoading) ? 
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">{this.state.title}</h1>
@@ -27,7 +26,6 @@ componentDidMount () {
           {this.state.body}
         </p>
       </div>
-      :<p>Loading...</p>
     );
   }
 }
