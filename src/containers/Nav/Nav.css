@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+
+.Arrow {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    top: calc(50vh - 40px);
+    font-family: 'Rubik',
+    sans-serif;
+    color: #ffffff;
+    font-size: 2.5rem;
+    transition: all 1s ease;
+}
+
+.Arrow:hover {
+    transform: translateY(-4px) scale(1.4) !important;
+}
+
+.Left {
+    left: 40px;
+}
+
+.Right {
+    right: 40px;
+}
+
+.Pips {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 10vh;
+    text-align: center;
+    height: 10vh;
+    color: #ffffff;
+    font-size: 2.5rem;
+    transition: all 1s ease;
+}
+
+.Pips>div {
+    height: 10px;
+    width: 10px;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+.Pips>div:hover {
+    transform: scale(1.2)
+}
+
+.Active {
+    height: 14px!important;
+    width: 14px!important;
+    background-color: rgba(255, 255, 255, .9)!important;
+    transform: translateY(-2px);
+    transition: all 1s ease;
+}
+
+.Active:hover {
+    transform: translateY(-2px) scale(1.2) !important;
+    transition: all 1s ease;
+}

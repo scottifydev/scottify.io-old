@@ -37,8 +37,8 @@
         "react/jsx-uses-vars": "warn",
         "react/no-did-update-set-state": "error",
         "react/no-unknown-property": "error",
-        "react/no-unused-prop-types": "error",
-        "react/prop-types": "error",
+        "react/no-unused-prop-types": 1,
+        "react/prop-types": 1,
         "react/react-in-jsx-scope": "error",
         "mocha/no-exclusive-tests": "error"
     },

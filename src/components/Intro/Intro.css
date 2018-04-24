@@ -1,39 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Rubik');
-
 .Container {
-    width: 200px;
-}
-.Round {
-    height: 200px;
-    width: 200px;
-    border: 2px #ffffff solid;
-    border-radius: 50%;
-    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-content: center
 }
 
-.Shadow {
-    box-shadow: 7px 7px rgba(0, 0, 0, 0.2)
-}
-
-.Center {
-    vertical-align: middle;
-    text-align: center;
-    position: relative;
-    left: 50vw;
-    top: 50vh;
-    transform: translate(-50%, -50%)
-}
-
-.Caption {
-    display: inline-block;
-    font-family: 'Rubik',
-    sans-serif;
-    color: #ffffff;
-    font-size: 2.5rem;
-    margin-top: 20px;
-}
-
-.Me {
-    width:100%;
-    transform: translateY(-30px)
-}

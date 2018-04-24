@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import style from './App.css';
-import { setTimeout } from 'timers';
 import Intro from './components/Intro/Intro';
 import cn from 'classnames';
+import Spinner from './hoc/Spinner/Spinner'
+import { setTimeout } from 'timers';
 
 class App extends Component {
 
@@ -13,15 +14,19 @@ class App extends Component {
   }
 
 componentDidMount () {
-
+  setTimeout(() => {this.setState({ isLoading: false})}, 1000)
 
  }
 
   render() {
     return (
-      <div className={cn(style.App)}>
-        <Intro />
-      </div>
+      <Fragment>
+        <div className={cn(style.App)}>
+        {!this.state.isLoading 
+          ?<Intro />
+          :<Spinner />}
+        </div>
+      </Fragment>
     );
   }
 }
