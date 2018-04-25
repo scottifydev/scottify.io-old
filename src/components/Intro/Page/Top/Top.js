@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./Top.css";
 import cn from 'classnames';
-import me from '../../../assets/me.png'
+import me from '../../../../assets/me.png'
+import style from "./Top.css";
 
 const top = () => {
     return (
