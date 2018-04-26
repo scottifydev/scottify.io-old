@@ -1,6 +1,5 @@
 import * as actionTypes from './actions';
 
-
 const initialState = {
     page: 1,
     pips: [],
@@ -23,6 +22,11 @@ const reducer = (state = initialState, action) => {
             console.log('PIPS', action.payload)
             return Object.assign({}, state, {
                 pips: action.payload
+            });
+        case actionTypes.PIP_CLICK:
+            console.log('PIP_CLICK', action.payload)
+            return Object.assign({}, state, {
+                page: action.payload
             });
         default:
             return state;

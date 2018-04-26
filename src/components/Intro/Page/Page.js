@@ -1,6 +1,4 @@
-import React, { Component, Fragment } from "react";
-
-import Nav from '../../../containers/Nav/Nav';
+import React from "react";
 import Text from './Text/Text';
 import Top from './Top/Top';
 import cn from 'classnames';

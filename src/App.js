@@ -1,20 +1,21 @@
 import React, { Component, Fragment } from 'react';
-import style from './App.css';
+
 import Intro from './components/Intro/Intro';
-import cn from 'classnames';
 import Spinner from './hoc/Spinner/Spinner'
+import cn from 'classnames';
 import { setTimeout } from 'timers';
+import style from './App.css';
 
 class App extends Component {
 
   state = {
     title: 'asdasd',
     body: 'asdasd',
-    isLoading: true
+    isLoading: false
   }
 
 componentDidMount () {
-  setTimeout(() => {this.setState({ isLoading: false})}, 1000)
+  // setTimeout(() => {this.setState({ isLoading: false})}, 1000)
 
  }
 

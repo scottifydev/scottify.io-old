@@ -5,9 +5,6 @@ import Page from './Page/Page';
 import { connect } from "react-redux";
 
 class Intro extends Component {
-    state = {
-
-    }
     render() {
         return ( 
             <Fragment>

@@ -1,9 +1,11 @@
-import React, { Component, Fragment } from 'react';
-import style from './Nav.css';
-import cn from 'classnames';
-import PropTypes from 'prop-types';
-import { connect } from "react-redux";
 import * as actionTypes from '../../store/actions';
+
+import React, { Component, Fragment } from 'react';
+
+import PropTypes from 'prop-types';
+import cn from 'classnames';
+import { connect } from "react-redux";
+import style from './Nav.css';
 
 class Nav extends Component {
 
@@ -11,22 +13,32 @@ class Nav extends Component {
         this.props.onPipsChange(this.generatePips(this.props.pipNumber, 1))
         
     }
-    
-    componentDidUpdate = () => {
-        let active = this.props.page;
-        console.log('active', active)
-        console.log('componentDidUpdate')
-        console.log(this.props.page)
-    }
 
-    generatePips = (pips, active) => Array(pips).fill().map( (e,i) => <div key={i + 1} className={i + 1 === active ? style.Active : null}></div>)
-
+    generatePips = (pips, active) => (
+        Array(pips)
+        .fill()
+        .map( (e,i) => {
+            let page = i + 1;
+            return (
+                <div
+                    key={page}
+                    className={page === active ? style.Active : null}
+                    onClick={() => this.handlePipClick(page)}
+                >
+                </div>
+        )})
+)
 
     handlePips = (direction) => {
         console.log('[Handling Pips]')
         console.log('this.props.page', this.props.page)
         let pips = this.generatePips(this.props.pipNumber, this.props.page + direction)
         this.props.onPipsChange(pips)
+    }
+
+    handlePipClick = (page) => {
+        this.props.onPipClick(page);
+        this.props.onPipsChange(this.generatePips(this.props.pipNumber, page));
     }
 
     handleNav = (direction) => {
@@ -44,19 +56,25 @@ class Nav extends Component {
     render () {
         return (
             <Fragment>
-                {this.props.page != 1 ? <div
-                    onClick={() => this.handleNav('BACKWARD')} className={cn(style.Arrow, style.Left)}>{'<'}</div>: null}
+                {this.props.page != 1
+                    ? <div
+                        onClick={() => this.handleNav('BACKWARD')}
+                        className={cn(style.Arrow, style.Left)}
+                        >
+                            {'<'}
+                        </div>
+                    : null}
                 <div 
                     className={cn(style.Arrow, style.Right)}
                     onClick={() => this.handleNav('FORWARD')}
                     >
-                    {'>'}
-                </div>
+                        {'>'}
+                    </div>
                 <div
                     className={cn(style.Pips)}
-                    >                                                     
-                    {this.props.pips}
-                </div>
+                    >
+                        {this.props.pips}
+                    </div>
             </Fragment>
         )
     }
@@ -73,6 +91,10 @@ const mapDispatchToProps = dispatch => {
     return {
         onForward: () => dispatch({ type: actionTypes.FORWARD }),
         onBackward: () => dispatch({ type: actionTypes.BACKWARD }),
+        onPipClick: (payload) => dispatch({
+            type: actionTypes.PIP_CLICK,
+            payload
+        }),
         onPipsChange: (payload) => dispatch({
             type: actionTypes.PIPS,
             payload
