@@ -1,5 +1,6 @@
 import React from "react";
 import cn from 'classnames';
+import { connect } from "react-redux";
 import me from '../../../../assets/me.png'
 import style from "./Top.css";
 
@@ -11,4 +12,11 @@ const top = () => {
     )
 }
 
-export default top;
+const mapStateToProps = state => {
+    return {
+        page: state.page
+    };
+}
+
+
+export default connect(mapStateToProps)(top);

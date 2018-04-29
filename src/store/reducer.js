@@ -3,7 +3,9 @@ import * as actionTypes from './actions';
 const initialState = {
     page: 1,
     pips: [],
-    pipNumber: 4
+    pipNumber: 4,
+    changing: true,
+    changeDelay: 300
 }
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +19,11 @@ const reducer = (state = initialState, action) => {
             console.log('BACKWARD')
             return Object.assign({}, state, {
                 page: state.page - 1
+            });
+        case actionTypes.CHANGING:
+            console.log('CHANGING', state.changing)
+            return Object.assign({}, state, {
+                changing: !state.changing
             });
         case actionTypes.PIPS:
             console.log('PIPS', action.payload)

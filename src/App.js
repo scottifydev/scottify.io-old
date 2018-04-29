@@ -11,11 +11,11 @@ class App extends Component {
   state = {
     title: 'asdasd',
     body: 'asdasd',
-    isLoading: false
+    isLoading: true
   }
 
 componentDidMount () {
-  // setTimeout(() => {this.setState({ isLoading: false})}, 1000)
+  setTimeout(() => {this.setState({ isLoading: false})}, 1000)
 
  }
 
@@ -23,9 +23,10 @@ componentDidMount () {
     return (
       <Fragment>
         <div className={cn(style.App)}>
-        {!this.state.isLoading 
-          ?<Intro />
-          :<Spinner />}
+          { !this.state.isLoading 
+            ? <Intro />
+            : <Spinner />
+          }
         </div>
       </Fragment>
     );
