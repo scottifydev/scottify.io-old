@@ -1,11 +1,12 @@
 import React from 'react';
 import cn from 'classnames';
-import style from './Spinner.css'
+
+import style from './Spinner.css';
 
 const spinner = () => (
-    <div className={cn(style.Overlay)}>
-        <div className={cn(style.Spinner)}></div>
-    </div> 
-)
+    <div className={ cn( style.Overlay ) }>
+        <div className={ cn( style.Spinner ) } />
+    </div>
+);
 
 export default spinner;
