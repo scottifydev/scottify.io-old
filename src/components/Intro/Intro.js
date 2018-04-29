@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Transition from 'react-transition-group/Transition';
 import cn from 'classnames';
 
@@ -7,38 +8,44 @@ import Nav from '../../containers/Nav/Nav';
 import Page from './Page/Page';
 import style from './Intro.css';
 
-class Intro extends Component {
-    render() {
-        return ( 
-            <div className={style.FadeIn}>
-                <Nav/>
-                <Transition
-                    in={this.props.changing}
-                    timeout={this.props.changeDelay}
-                    >
-                    { (state) =>
-                        <div
-                            className={
-                                state === 'exiting'
-                                ? cn(style.Hide)
-                                : cn(style.Show)
-                            }
-                            >
-                             <Page />
-                        </div>
+const intro = props => (
+    <div className={ style.FadeIn }>
+        <Nav />
+        <Transition
+            in={ props.changing }
+            timeout={ props.changeDelay }
+        >
+            { state => (
+                <div
+                    className={
+                        state === 'exiting'
+                            ? cn( style.Hide )
+                            : cn( style.Show )
                     }
-                </Transition>
-            </div>
-        )
-    }
-}
-const mapStateToProps = state => {
-    return {
+                >
+                    <Page />
+                </div>
+            )}
+        </Transition>
+    </div>
+);
+
+const mapStateToProps = state => (
+    {
         page: state.page,
         changing: state.changing,
-        delay: state.changeDelay
-    };
-}
+        delay: state.changeDelay,
+    }
+);
 
+export default connect( mapStateToProps )( intro );
 
-export default connect(mapStateToProps)(Intro);
+intro.propTypes = {
+    changing: PropTypes.bool,
+    changeDelay: PropTypes.number,
+};
+
+intro.defaultProps = {
+    changing: false,
+    changeDelay: 300,
+};
