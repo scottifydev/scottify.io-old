@@ -1,129 +1,146 @@
-import * as actionTypes from '../../store/actions';
-
 import React, { Component, Fragment } from 'react';
-
+import { connect } from 'react-redux';
+import { setTimeout } from 'timers';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { connect } from "react-redux";
-import { setTimeout } from 'timers';
+
+import * as actionTypes from '../../store/actions';
 import style from './Nav.css';
 
 class Nav extends Component {
-
-    componentDidMount = () => {
-        this.props.onPipsChange(this.generatePips(this.props.pipNumber, 1))
-        
+    componentDidMount = ( ) => {
+        this.props.onPipsChange( this.generatePips( this.props.pipNumber, 1 ) );
     }
 
-    generatePips = (pips, active) => (
-        Array(pips)
-        .fill()
-        .map( (e,i) => {
-            let page = i + 1;
-            return (
-                <div
-                    key={page}
-                    className={page === active ? style.Active : null}
-                    onClick={() => this.handlePipClick(page)}
-                >
-                </div>
-        )})
+    handleChange = ( pips ) => {
+        this.props.onChanging( );
+        this.delayIt( ( ) => this.props.onChanging( ) );
+        this.props.onPipsChange( pips );
+    }
+
+    generatePips = ( pips, active ) => (
+        Array( pips )
+            .fill( )
+            .map( ( e, i ) => {
+                const page = i + 1;
+                return (
+                    <div
+                        key={ page }
+                        className={ page === active ? style.Active : null }
+                        onClick={ ( ) => this.handlePipClick( page ) }
+                        onKeyUp={ ( ) => this.handlePipClick( page ) }
+                        role="button"
+                        tabIndex={ i }
+                    />
+                );
+            } )
     )
 
-    handlePips = (direction) => {
-        console.log('[Handling Pips]');
-        console.log('this.props.page', this.props.page);
-        let pips = this.generatePips(this.props.pipNumber, this.props.page + direction);
-        this.handleChange(pips)
+    handlePips = ( direction ) => {
+        const pips = this.generatePips( this.props.pipNumber, this.props.page + direction );
+        this.handleChange( pips );
     }
 
-    handlePipClick = (page) => {
-        this.handleChange(this.generatePips(this.props.pipNumber, page));
-        setTimeout(() => this.props.onPipClick(page), this.props.delay)
+    handlePipClick = ( page ) => {
+        this.handleChange( this.generatePips( this.props.pipNumber, page ) );
+        this.delayIt( () => this.props.onPipClick( page ) );
     }
 
-    handleNav = (direction) => {
-        if (direction === 'FORWARD') {
-            this.handlePips(1);
-            this.delayIt(() => this.props.onForward())
-        } if (direction === 'BACKWARD') {
-            this.handlePips(-1);
-            this.delayIt(() => this.props.onBackward())
+    handleNav = ( direction ) => {
+        if ( direction === 'FORWARD' ) {
+            this.handlePips( 1 );
+            this.delayIt( ( ) => this.props.onForward( ) );
+        } if ( direction === 'BACKWARD' ) {
+            this.handlePips( -1 );
+            this.delayIt( ( ) => this.props.onBackward( ) );
         }
-        
     }
 
-    handleChange = (pips) => {
-        this.props.onChanging();
-        this.delayIt(() => this.props.onChanging())
-        this.props.onPipsChange(pips);
-    }
+    delayIt = fn => setTimeout( fn, this.props.delay )
 
-    delayIt = (fn) => setTimeout(fn, this.props.delay)
-
-    render () {
+    render( ) {
         return (
-                <Fragment>
-                    {this.props.page != 1
-                        ? <div
-                            onClick={() => this.handleNav('BACKWARD')}
-                            className={cn(style.Arrow, style.Left)}
-                            >
-                                {'<'}
-                            </div>
-                        : null}
-                    <div 
-                        className={cn(style.Arrow, style.Right)}
-                        onClick={() => this.handleNav('FORWARD')}
+            <Fragment>
+                {this.props.page !== 1
+                    ? (
+                        <div
+                            onClick={ ( ) => this.handleNav( 'BACKWARD' ) }
+                            className={ cn( style.Arrow, style.Left ) }
+                            onKeyPress={ () => this.handleNav( 'BACKWARD' ) }
+                            role="button"
+                            tabIndex={ 0 }
                         >
-                        {'>'}
-                    </div>
-                    <div
-                        className={cn(style.Pips)}
-                        >
-                        {this.props.pips}
-                    </div>
-                </Fragment>
-            )
-        }
+                            {'<'}
+                        </div>
+                    )
+                    : null
+                }
+                <div
+                    className={ cn( style.Arrow, style.Right ) }
+                    onClick={ ( ) => this.handleNav( 'FORWARD' ) }
+                    onKeyPress={ () => this.handleNav( 'FORWARD' ) }
+                    role="button"
+                    tabIndex={ 0 }
+                >
+                    {'>'}
+                </div>
+                <div
+                    className={ cn( style.Pips ) }
+                >
+                    {this.props.pips}
+                </div>
+            </Fragment>
+        );
+    }
 }
-const mapStateToProps = state => {
-    return {
+const mapStateToProps = state => (
+    {
         page: state.page,
         pips: state.pips,
         pipNumber: state.pipNumber,
-        delay: state.changeDelay
-    };
-}
+        delay: state.changeDelay,
+    }
+);
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onForward: () => dispatch({ type: actionTypes.FORWARD }),
-        onBackward: () => dispatch({ type: actionTypes.BACKWARD }),
-        onChanging: () => dispatch({ type: actionTypes.CHANGING }),
-        onPipClick: (payload) => dispatch({
+const mapDispatchToProps = dispatch => (
+    {
+        onForward: ( ) => dispatch( { type: actionTypes.FORWARD } ),
+        onBackward: ( ) => dispatch( { type: actionTypes.BACKWARD } ),
+        onChanging: ( ) => dispatch( { type: actionTypes.CHANGING } ),
+        onPipClick: payload => dispatch( {
             type: actionTypes.PIP_CLICK,
-            payload
-        }),
-        onPipsChange: (payload) => dispatch({
+            payload,
+        } ),
+        onPipsChange: payload => dispatch( {
             type: actionTypes.PIPS,
-            payload
-        })
+            payload,
+        } ),
 
-    };
-}
+    }
+);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default connect( mapStateToProps, mapDispatchToProps )( Nav );
 
 Nav.propTypes = {
-    // pips: PropTypes.number,
+    pips: PropTypes.arrayOf( PropTypes.element ),
     page: PropTypes.number,
     onForward: PropTypes.func,
     onBackward: PropTypes.func,
-    // onPipNumberChange: PropTypes.func,
-    // onPipsChange: PropTypes.func,
+    onPipClick: PropTypes.func,
+    onChanging: PropTypes.func,
+    onPipsChange: PropTypes.func,
     pipNumber: PropTypes.number,
+    delay: PropTypes.number,
+};
 
-    // pipNum: PropTypes.number,
-    // pages: PropTypes.number
-}
+Nav.defaultProps = {
+    pips: [],
+    page: 1,
+    onForward: null,
+    onBackward: null,
+    onPipClick: null,
+    onChanging: null,
+    onPipsChange: null,
+    pipNumber: PropTypes.number,
+    delay: 300,
+};

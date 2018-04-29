@@ -1,6 +1,7 @@
+import { connect } from "react-redux";
 import React from "react";
 import cn from 'classnames';
-import { connect } from "react-redux";
+
 import me from '../../../../assets/me.png'
 import style from "./Top.css";
 

@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Transition from 'react-transition-group/Transition';
+import cn from 'classnames';
 
 import Nav from '../../containers/Nav/Nav';
 import Page from './Page/Page';
-import Transition from "react-transition-group/Transition";
-import cn from 'classnames';
-import { connect } from "react-redux";
 import style from './Intro.css';
 
 class Intro extends Component {

@@ -12,36 +12,69 @@
         "react",
         "mocha"
     ],
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    "rules": {
-        "no-console": 0,
-        "no-unused-vars": [
-            "warn",
-            {
-                "vars": "all",
-                "args": "after-used",
-                "ignoreRestSiblings": false
-            }
-        ],
-        "react/jsx-no-bind": [
-            "error",
-            {
-                "allowArrowFunctions": true,
-                "allowBind": false,
-                "ignoreRefs": true
-            }
-        ],
-        "react/jsx-uses-vars": "warn",
-        "react/no-did-update-set-state": "error",
-        "react/no-unknown-property": "error",
-        "react/no-unused-prop-types": 1,
-        "react/prop-types": 1,
-        "react/react-in-jsx-scope": "error",
-        "mocha/no-exclusive-tests": "error"
-    },
+    "extends": "airbnb",
+        "rules": {
+            "indent": [
+                2,
+                4,
+                {
+                    "SwitchCase": 1
+                }
+            ],
+            "space-in-parens": [
+                2,
+                "always"
+            ],
+            "template-curly-spacing": [
+                2,
+                "always"
+            ],
+            "array-bracket-spacing": [
+                2,
+                "always"
+            ],
+            "object-curly-spacing": [
+                2,
+                "always"
+            ],
+            "computed-property-spacing": [
+                2,
+                "always"
+            ],
+            "no-multiple-empty-lines": [
+                2,
+                {
+                    "max": 1,
+                    "maxEOF": 0,
+                    "maxBOF": 0
+                }
+            ],
+            "no-use-before-define": [
+                2,
+                {
+                    "functions": false
+                }
+            ],
+            "prefer-const": 1,
+            "complexity": [
+                1,
+                5
+            ],
+            "react/jsx-indent-props": [
+                2,
+                4
+            ],
+            "react/prefer-es6-class": 0,
+            "react/jsx-filename-extension": 0,
+            "react/jsx-curly-spacing": [
+                2,
+                "always"
+            ],
+            "react/jsx-indent": [
+                2,
+                4
+            ]
+        },
     "settings": {
         "react": {
             "pragma": "React",

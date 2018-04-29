@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
-
-import cn from 'classnames';
 import { connect } from "react-redux";
+import cn from 'classnames';
+
 import style from "./Text.css";
 
 class Text extends Component {
