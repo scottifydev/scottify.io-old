@@ -75,15 +75,20 @@ class Nav extends Component {
                     )
                     : null
                 }
-                <div
-                    className={ cn( style.Arrow, style.Right ) }
-                    onClick={ ( ) => this.handleNav( 'FORWARD' ) }
-                    onKeyPress={ () => this.handleNav( 'FORWARD' ) }
-                    role="button"
-                    tabIndex={ 0 }
-                >
-                    {'>'}
-                </div>
+                {this.props.page !== this.props.pipNumber
+                    ? (
+                        <div
+                            className={ cn( style.Arrow, style.Right ) }
+                            onClick={ () => this.handleNav( 'FORWARD' ) }
+                            onKeyPress={ () => this.handleNav( 'FORWARD' ) }
+                            role="button"
+                            tabIndex={ 0 }
+                        >
+                            {'>'}
+                        </div>
+                    )
+                    : null
+                }
                 <div
                     className={ cn( style.Pips ) }
                 >
@@ -107,6 +112,7 @@ const mapDispatchToProps = dispatch => (
         onForward: ( ) => dispatch( { type: actionTypes.FORWARD } ),
         onBackward: ( ) => dispatch( { type: actionTypes.BACKWARD } ),
         onChanging: ( ) => dispatch( { type: actionTypes.CHANGING } ),
+        onIntroStop: ( ) => dispatch( { type: actionTypes.INTRO_STOPPED } ),
         onPipClick: payload => dispatch( {
             type: actionTypes.PIP_CLICK,
             payload,

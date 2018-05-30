@@ -5,10 +5,12 @@ import * as actionTypes from './actions';
 const initialState = {
     page: 1,
     pips: [],
+    pages: [],
     pipNumber: 4,
     changing: true,
     changeDelay: 300,
     isLoading: true,
+    introStopped: false,
 };
 
 const reducer = ( state = initialState, action ) => {
@@ -33,9 +35,17 @@ const reducer = ( state = initialState, action ) => {
             return Object.assign( {}, state, {
                 pips: action.payload,
             } );
+        case actionTypes.PAGES:
+            return Object.assign( {}, state, {
+                pages: action.payload,
+            } );
         case actionTypes.PIP_CLICK:
             return Object.assign( {}, state, {
                 page: action.payload,
+            } );
+        case actionTypes.STOP_INTRO:
+            return Object.assign( {}, state, {
+                introStopped: true,
             } );
         default:
             return state;

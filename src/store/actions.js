@@ -5,3 +5,5 @@ export const PIP_NUMBER = 'PIP_NUMBER';
 export const PIP_CLICK = 'PIP_CLICK';
 export const CHANGING = 'CHANGING';
 export const LOADING = 'LOADING';
+export const PAGES = 'PAGES';
+export const INTRO_STOPPED = 'INTRO_STOPPED';

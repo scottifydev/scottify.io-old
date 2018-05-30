@@ -7,18 +7,42 @@ import style from './Text.css';
 
 class Text extends Component {
     content = [
-        'Hi, I\'m Scott.',
-        'This is some more Text',
-        'And even more',
+        {
+            text: 'Hi, I\'m Scott.',
+        },
+        {
+            text: 'I make things for the web...',
+        },
+        {
+            text: 'and and in real life.',
+        },
+        {
+            type: 'a',
+            link: 'https://github.com/scottifydev/scottify.io',
+            text: 'More soon...',
+        },
     ]
 
-    handleText = () => (
-        <span
-            className={ cn( style.Caption, 'text-center' ) }
-        >
-            { this.content[ this.props.page - 1 ] }
-        </span>
-    );
+    handleText = () => {
+        const index = this.props.page - 1;
+        return (
+            <span
+                className={ cn( style.Caption, 'text-center' ) }
+            >
+                {
+                    this.content[ index ].type
+                        ? (
+                            <a
+                                href={ this.content[ index ].link }
+                            >
+                                { this.content[ index ].text }
+                            </a>
+                        )
+                        : this.content[ index ].text
+                }
+            </span>
+        );
+    };
 
     render() {
         return (
